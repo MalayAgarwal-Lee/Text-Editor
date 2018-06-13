@@ -1,6 +1,7 @@
 from tkinter import *
 from tags import *
 
+
 def styling_helper(obj, format_type):
         text_box = obj.text_box
 
