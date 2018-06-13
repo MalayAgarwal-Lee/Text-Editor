@@ -68,8 +68,8 @@ class MainPage(Frame):
             tag_names = text_box.tag_names(start_index)
             last_formatting = tag_names[-1]
 
-            for format in tag_names[1:]:
-                self.text_box.tag_remove(format, start_index, end_index)
+            for formatting in tag_names[1:]:
+                self.text_box.tag_remove(formatting, start_index, end_index)
 
             if last_formatting == 'sel':
                 formats = [format_type]
