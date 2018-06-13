@@ -1,5 +1,4 @@
 from tkinter import *
-import font
 from formatting_helpers import *
 from tags import *
 from helper_classes import *
