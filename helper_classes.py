@@ -25,6 +25,14 @@ class FormatButton(Button):
     def __init__(self, master=None, text='', command=None):
         super().__init__(master, text=text, command=command)
         self.pack(side=LEFT)
+        self.customize()
+
+    def customize(self):
+        self['background'] = 'gray99'
+        self['width'] = 10
+        self['padx'] = 5
+        self['pady'] = 5
+        self['borderwidth'] = 0
 
 
 class FormattingFrame(Frame):
@@ -39,3 +47,7 @@ class FormattingFrame(Frame):
         self.bold_button = FormatButton(self, text='Bold')
         self.underline_button = FormatButton(self, text='Underline')
         self.italic_button = FormatButton(self, text='Italic')
+
+        self.bold_button.pack(side=LEFT)
+        self.underline_button.pack(side=LEFT)
+        self.italic_button.pack(side=LEFT)
