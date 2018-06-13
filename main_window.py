@@ -27,8 +27,18 @@ class FormatButton(Button):
         self.pack(side=LEFT)
 
 
-class MenuBar(Menu):
-    pass
+class FormattingFrame(Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.pack(side=TOP, fill=X)
+        self.configure(background='gray99', borderwidth=2)
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.bold_button = FormatButton(self, text='Bold')
+        self.underline_button = FormatButton(self, text='Underline')
+        self.italic_button = FormatButton(self, text='Italic')
 
 
 class MainPage(Frame):
@@ -38,21 +48,15 @@ class MainPage(Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        self.menu_frame = Frame(self)
-        self.menu_frame.pack(side=TOP)
+        self.format_frame = FormattingFrame(self)
+        self.format_frame.pack(side=TOP)
 
-        self.bold_button = FormatButton(self.menu_frame,
-                                        text='Bold',
-                                        command=self.make_bold)
+        format_frame = self.format_frame
 
-        self.italic_button = FormatButton(self.menu_frame,
-                                          text='Italic',
-                                          command=self.make_italic)
-
-        self.underline_button = FormatButton(self.menu_frame,
-                                             text='Underline',
-                                             command=self.make_underline)
-
+        format_frame.bold_button.config(command=self.make_bold)
+        format_frame.italic_button.config(command=self.make_italic)
+        format_frame.underline_button.config(command=self.make_underline)
+        
         self.text_frame = Frame(self)
         self.text_frame.pack(fill=BOTH, expand=True)
 
@@ -107,5 +111,6 @@ class MainPage(Frame):
 
 
 root = Tk()
+root.option_add('*tearOff', FALSE)
 main_page = MainPage(master=root)
 main_page.mainloop()
