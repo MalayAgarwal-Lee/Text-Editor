@@ -1,5 +1,6 @@
 from tkinter import *
 import font
+import unicode_chars
 
 
 FONT = font.get_font()
@@ -44,10 +45,12 @@ class FormattingFrame(Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        self.bold_button = FormatButton(self, text='Bold')
-        self.underline_button = FormatButton(self, text='Underline')
-        self.italic_button = FormatButton(self, text='Italic')
+        self.bold_button = FormatButton(self, text=unicode_chars.bold)
+        self.underline_button = FormatButton(self, text=unicode_chars.underline)
+        self.italic_button = FormatButton(self, text=unicode_chars.italic)
+        self.strike_through = FormatButton(self, text=unicode_chars.strike)
 
         self.bold_button.pack(side=LEFT)
         self.underline_button.pack(side=LEFT)
         self.italic_button.pack(side=LEFT)
+        self.strike_through.pack(side=LEFT)
