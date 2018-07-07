@@ -10,8 +10,8 @@ if operating_system == 'Windows':
 
 elif operating_system == 'Linux':
 
-    bold = ''
+    bold = '\u0061'
     italic = ''
-    underline = ''
+    underline = '\u00AA'
 
 strike = 'S̵t̵r̵i̵k̵e̵'
