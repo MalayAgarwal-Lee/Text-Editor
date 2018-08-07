@@ -14,26 +14,26 @@ def styling_helper(obj, format_type):
         None
     """
 
-    # storing the TextBox object in variable
-    # for faster access
+    # Storing the TextBox object in variable
+    # For faster access
     text_box = obj.text_box
 
-    # catching selection, if any
+    # Catching selection, if any
     try:
-        # getting the start, end of selection
+        # Getting the start, end of selection
         start_index = text_box.index('sel.first')
         end_index = text_box.index('sel.last')
 
-        # getting prexisting tags applied at selection
+        # Getting prexisting tags applied at selection
         # 'sel' tag is always present
         tag_names = text_box.tag_names(start_index)
 
-        # getting the last formatting applied on the selection
+        # Getting the last formatting applied on the selection
         # can be any of the tags defined in tags.py
         # including 'sel' (if no tags are applied)
         last_formatting = tag_names[-1]
 
-        # removing all tags, except 'sel' (always the first tag)
+        # Removing all tags, except 'sel' (always the first tag)
         for formatting in tag_names[1:]:
             text_box.tag_remove(formatting, start_index, end_index)
 
@@ -42,44 +42,44 @@ def styling_helper(obj, format_type):
         if last_formatting == 'sel':
             formats = [format_type]
 
-        # if tag was already applied, needs to be removed
+        # If tag was already applied, needs to be removed
         # with all other formatting still intact
         elif format_type in last_formatting:
 
-            # splitting the last formatting's name into components
-            # will be a list containing 'bld', 'it' and 'ul' (see tags.py)
+            # Splitting the last formatting's name into components
+            # Will be a list containing 'bld', 'it' and 'ul' (see tags.py)
             formats = last_formatting.split('-')
 
-            # excluding the passed formatting from the list
+            # Exluding the passed formatting from the list
             formats = [x for x in formats if x != format_type]
             
-            # if passed tag was the only pre-existing formatting
+            # If passed tag was the only pre-existing formatting
             # and the corresponding format button was clicked
             # list will be empty
-            # if list's empty, we can return
+            # If list's empty, we can return
             # because tag was already removed by for loop
             if not formats:
                 return
 
-            # sorting is important since tags.py stores alphabetically
+            # Sorting is important since tags.py stores alphabetically
             # 'bld' < 'it' < 'ul'
             formats.sort()
 
-        # none above true implies passed tag is new
-        # adding it to a list, sorting the list
+        # None above true implies passed tag is new
+        # Adding it to a list, sorting the list
         else:
             formats = last_formatting.split('-') + [format_type]
             formats.sort()
 
-        # creating a string of the form: 'fmt1-...-fmtn', n = 1, 2, 3
-        # using the list made in if clauses
+        # Creating a string of the form: 'fmt1-...-fmtn', n = 1, 2, 3
+        # Using the list made in if clauses
         formatting_strng = '-'.join(formats)
 
         # Obtaining relevant tag to be applied
-        # from 'TAG' dict in tags.py
+        # From 'TAG' dict in tags.py
         tag = TAGS[formatting_strng]
 
-        # configuring and adding the obtained tag
+        # Configuring and adding the obtained tag
         text_box.tag_config(tag['tagName'], **tag['kw'])
         text_box.tag_add(tag['tagName'], start_index, end_index)
 
