@@ -46,12 +46,20 @@ def styling_helper(obj, format_type):
         # with all other formatting still intact
         elif format_type in last_formatting:
 
-            # splitting the last formatting's name into components 
+            # splitting the last formatting's name into components
             # will be a list containing 'bld', 'it' and 'ul' (see tags.py)
             formats = last_formatting.split('-')
 
             # excluding the passed formatting from the list
             formats = [x for x in formats if x != format_type]
+            
+            # if passed tag was the only pre-existing formatting
+            # and the corresponding format button was clicked
+            # list will be empty
+            # if list's empty, we can return
+            # because tag was already removed by for loop
+            if not formats:
+                return
 
             # sorting is important since tags.py stores alphabetically
             # 'bld' < 'it' < 'ul'
@@ -67,19 +75,9 @@ def styling_helper(obj, format_type):
         # using the list made in if clauses
         formatting_strng = '-'.join(formats)
 
-        # if passed tag was the only pre-existing formatting
-        # and the corresponding format button was clicked
-        # the elif clause will produce empty list, creating empty string
-        if formatting_strng:
-
-            # obtaining the relevant tag to be applied
-            # from TAGS (dict) defined in tags.py
-            tag = TAGS[formatting_strng]
-
-        # if string's empty, we can return
-        # because tag was already removed by for loop
-        else:
-            return
+        # Obtaining relevant tag to be applied
+        # from 'TAG' dict in tags.py
+        tag = TAGS[formatting_strng]
 
         # configuring and adding the obtained tag
         text_box.tag_config(tag['tagName'], **tag['kw'])
